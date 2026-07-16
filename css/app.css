@@ -726,7 +726,12 @@ button {
     text-align: center;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 485px) {
+    .hero::before,
+    .welcome::before {
+        background-size: cover;
+    }
+
     .actions {
         flex-direction: column;
         align-items: stretch;
