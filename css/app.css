@@ -28,6 +28,9 @@ html {
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    background-color: var(--cream);
+    scroll-padding-top: clamp(5.25rem, 16vmin, 8.5rem);
+    scroll-padding-bottom: calc(var(--nav-h) + 1rem);
 }
 
 html::-webkit-scrollbar {
@@ -40,10 +43,69 @@ body {
     margin: 0;
     font-family: var(--sans);
     color: var(--text);
-    background: var(--cream);
+    background: transparent;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.site-bg__paper {
+    position: absolute;
+    inset: 0;
+    background-color: var(--cream);
+    background-image: url("../assets/images/bg-paper.jpeg");
+    background-image: -webkit-image-set(
+        url("../assets/images/bg-paper.webp") type("image/webp"),
+        url("../assets/images/bg-paper.jpeg") type("image/jpeg")
+    );
+    background-image: image-set(
+        url("../assets/images/bg-paper.webp") type("image/webp"),
+        url("../assets/images/bg-paper.jpeg") type("image/jpeg")
+    );
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.bg-daffodils {
+    position: absolute;
+    inset: 0;
+}
+
+.bg-daffodil {
+    position: absolute;
+    left: 50%;
+    width: clamp(11.75rem, 52vmin, 24rem);
+    aspect-ratio: 984 / 452;
+    background-image: url("../assets/images/daffodils.webp");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transform: translateX(-50%);
+}
+
+.bg-daffodil--top {
+    top: 0.2rem;
+}
+
+.bg-daffodil--bottom {
+    bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 0.15rem);
+}
+
+main {
+    position: relative;
+    z-index: 1;
+}
+
+body:has(#welcome) main {
+    visibility: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -107,11 +169,7 @@ button {
 
 .page-bg {
     width: 100%;
-    background-color: var(--cream);
-    background-image: url("../assets/images/main-bg.jpeg");
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-size: cover;
+    background: transparent;
 }
 
 .section--band {
@@ -144,6 +202,14 @@ button {
     margin: 1.25rem auto;
     background: linear-gradient(90deg, transparent, var(--bronze), transparent);
     border: 0;
+}
+
+.divider {
+    width: min(36rem, calc(100% - 1.5rem));
+    height: 1px;
+    margin: 1.25rem auto;
+    border: 0;
+    background: linear-gradient(90deg, transparent, var(--bronze), transparent);
 }
 
 /* Bottom nav */
@@ -182,40 +248,10 @@ button {
     display: grid;
     place-items: center;
     text-align: center;
-    padding: clamp(2rem, 5vh, 3.5rem) 1rem calc(var(--nav-h) + 1.5rem);
+    padding: clamp(6.25rem, 22vmin, 10rem) 1rem calc(var(--nav-h) + clamp(5.25rem, 20vmin, 8.5rem));
     position: relative;
     overflow: hidden;
-    background: var(--cream);
-}
-
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    background-image: url("../assets/images/daffodils.jpeg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% auto;
-    opacity: 0.62;
-    pointer-events: none;
-    animation: drift 14s ease-in-out infinite alternate;
-}
-
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(180deg, rgba(242, 240, 234, 0.2) 0%, rgba(242, 240, 234, 0.42) 48%, rgba(242, 240, 234, 0.82) 100%),
-        radial-gradient(circle at 18% 22%, rgba(232, 200, 74, 0.12), transparent 40%),
-        radial-gradient(circle at 82% 70%, rgba(138, 154, 107, 0.08), transparent 45%);
-    pointer-events: none;
-}
-
-@keyframes drift {
-    from { transform: scale(1); opacity: 0.55; }
-    to { transform: scale(1.04); opacity: 0.68; }
+    background: transparent;
 }
 
 .hero-inner {
@@ -455,7 +491,6 @@ button {
 }
 
 .schedule article {
-    border-top: 1px solid var(--line);
     padding-top: 1rem;
     text-align: center;
 }
@@ -482,7 +517,6 @@ button {
 /* Footer */
 .site-footer {
     padding: 3rem 0 calc(var(--nav-h) + 2rem);
-    border-top: 1px solid var(--line);
     text-align: center;
     background: transparent;
 }
@@ -518,31 +552,10 @@ button {
     display: grid;
     place-items: center;
     text-align: center;
-    padding: clamp(1rem, 3vh, 2rem) clamp(0.85rem, 3vw, 1.5rem);
-    background: var(--cream);
+    padding: clamp(7.25rem, 22vmin, 12rem) clamp(0.85rem, 3vw, 1.5rem) calc(var(--nav-h) + clamp(8rem, 24vmin, 12.5rem));
+    background: transparent;
     overflow: hidden;
     transition: opacity 0.6s ease, visibility 0.6s ease;
-}
-
-.welcome::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    background-image: url("../assets/images/daffodils.jpeg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% auto;
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.welcome::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(242, 240, 234, 0.28) 0%, rgba(242, 240, 234, 0.48) 42%, rgba(242, 240, 234, 0.78) 100%);
-    pointer-events: none;
 }
 
 .welcome.is-hiding {
@@ -622,12 +635,12 @@ button {
 /* Laptop / mid screens: keep vertical rhythm balanced */
 @media (min-width: 900px) and (min-height: 700px) {
     .welcome-card {
-        gap: clamp(0.9rem, 2.8vh, 1.75rem);
+        gap: clamp(0.55rem, 1.8vh, 1rem);
     }
 
     .welcome .portrait {
-        width: clamp(12rem, 24vmin, 15rem);
-        height: clamp(12rem, 24vmin, 15rem);
+        width: clamp(10rem, 20vmin, 13rem);
+        height: clamp(10rem, 20vmin, 13rem);
     }
 
     .hero-inner {
@@ -639,10 +652,21 @@ button {
     }
 }
 
-@media (max-height: 720px) {
+@media (min-width: 900px) and (max-height: 960px) {
+    .bg-daffodil {
+        width: clamp(12rem, 38vmin, 18.5rem);
+    }
+
+    .welcome {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
     .welcome .portrait {
-        width: clamp(8.5rem, 24vmin, 12rem);
-        height: clamp(8.5rem, 24vmin, 12rem);
+        width: clamp(8.5rem, 20vmin, 11rem);
+        height: clamp(8.5rem, 20vmin, 11rem);
     }
 
     .welcome h1 {
@@ -651,6 +675,21 @@ button {
 
     .welcome-card {
         gap: 0.55rem;
+    }
+}
+
+@media (max-height: 720px) {
+    .welcome .portrait {
+        width: clamp(8rem, 22vmin, 11rem);
+        height: clamp(8rem, 22vmin, 11rem);
+    }
+
+    .welcome h1 {
+        font-size: clamp(2.1rem, 6.5vw, 3.2rem);
+    }
+
+    .welcome-card {
+        gap: 0.45rem;
     }
 }
 
@@ -727,11 +766,6 @@ button {
 }
 
 @media (max-width: 485px) {
-    .hero::before,
-    .welcome::before {
-        background-size: cover;
-    }
-
     .actions {
         flex-direction: column;
         align-items: stretch;
